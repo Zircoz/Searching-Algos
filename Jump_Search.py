@@ -1,9 +1,9 @@
-# Python3 Jump Search
-# Complexity : O(sqrt(n))
+#Jump search
 import math
 
 def jumpSearch( arr , x ):
     # Finding block size to be jumped
+    ind=[]
     n = len(arr)
     step = math.sqrt(n)
 
@@ -28,16 +28,22 @@ def jumpSearch( arr , x ):
 
     # If element is found
     if arr[int(prev)] == x:
-        return int(prev)
+        
+        ind.append(int(prev))
+    while prev!=n-1:
+        if arr[int(prev)+1]==x:
+          ind.append(int(prev)+1)
+        prev=prev+1
 
-    return -1
+    return ind
+    if len(ind)==0:
+      return -1
 
 def main():
     arr = [ 0, 1, 3, 4, 4, 5, 8, 13, 22, 24, 55, 59, 122, 213, 422, 555 ]
-    x = 55
-
-    index = jumpSearch(arr, x)
-    print("Number {} is at index {}".format(x,index))
+    x = 4
+    jumpSearch(arr, x)
+    print("Number {} is at index {}".format(x,jumpSearch(arr,x)))
 
 if __name__ == "__main__":
     main()
